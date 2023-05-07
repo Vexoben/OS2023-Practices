@@ -22,4 +22,5 @@ extern int mm_init(void);
 
 /* This is largely for debugging.  You can do what you want with the
    verbose flag; we don't care. */
+void print_mem_blocks();   
 extern void mm_checkheap(int verbose);

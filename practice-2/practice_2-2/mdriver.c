@@ -989,7 +989,7 @@ static int eval_mm_valid(trace_t *trace, range_t **ranges)
 
 				/* Call the student's realloc */
 				oldp = trace->blocks[index];
-				newp = mm_realloc(oldp, size);
+				newp = mm_realloc(oldp, size); 
 				if( (newp == NULL) && (size != 0) ) {
 					malloc_error(trace, i, "mm_realloc failed.");
 					return 0;
@@ -998,7 +998,7 @@ static int eval_mm_valid(trace_t *trace, range_t **ranges)
 					malloc_error(trace, i, "mm_realloc with size 0 returned "
 							"non-NULL.");
 					return 0;
-				}
+				} 
 
 
 				/* Remove the old region from the range list */

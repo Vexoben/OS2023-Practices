@@ -2,14 +2,16 @@
 # Makefile for the malloc lab driver
 #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -O2 -g -DDRIVER
+CFLAGS = -Wall -Wextra -O2 -g -DDRIVER
+# CFLAGS = -Wall -Wextra -g -DDRIVER -fsanitize=address -ftrapv
+# CFLAGS = -Wall -Wextra -g -DDRIVER -fsanitize=address -ftrapv -DEBUG
 
 OBJS = mdriver.o mm.o memlib.o fsecs.o fcyc.o clock.o ftimer.o driverlib.o
 
 all: mdriver
 
 mdriver: $(OBJS)
-	$(CC) $(CFLAGS) -o mdriver $(OBJS)
+	$(CC) $(CFLAGS) -o code $(OBJS)
 
 mdriver.o: mdriver.c fsecs.h fcyc.h clock.h memlib.h config.h mm.h driverlib.h
 memlib.o: memlib.c memlib.h
@@ -22,3 +24,6 @@ driverlib.o: driverlib.c driverlib.h
 
 clean:
 	rm -f *~ *.o mdriver
+
+run:
+	./code
