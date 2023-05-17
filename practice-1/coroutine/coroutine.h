@@ -7,7 +7,7 @@
 
 typedef long long cid_t;
 #define MAXN 1000
-#define MAXCO 128
+#define MAXCO 10005
 #define UNAUTHORIZED -1
 #define FINISHED 2
 #define RUNNING 1
