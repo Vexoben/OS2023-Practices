@@ -16,6 +16,7 @@ int main()
 	//得到套接字描述符
 	int sockfd;		
 
+	sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     /* code */
 	
 	struct ifconf ifc;
@@ -32,13 +33,14 @@ int main()
 	ifc.ifc_buf = buf; 
 	
 	//获取所有接口信息
-	
+	ioctl(sockfd, SIOCGIFCONF, &ifc);
     /* code */
 	
 	//遍历每一个ifreq结构
 	struct ifreq *ifr;
 	struct ifreq ifrcopy;
 	ifr = (struct ifreq*)buf;
+	int ret;
 	for(int i = (ifc.ifc_len/sizeof(struct ifreq)); i>0; i--)
 	{
 		//接口名
@@ -52,6 +54,7 @@ int main()
 		ifrcopy = *ifr;
 
 		/* code */
+		ret = ioctl(sockfd, SIOCGIFMAP, &ifrcopy);
 
 		cout << "broad addr: "
 			 << inet_ntoa(((struct sockaddr_in*)&(ifrcopy.ifr_addr))->sin_addr)
@@ -60,6 +63,7 @@ int main()
 		ifrcopy = *ifr;
 		
         /* code */
+		ret = ioctl(sockfd, SIOCGIFMTU, &ifrcopy);
 
 		cout << "mtu: " << ifrcopy.ifr_mtu << endl;
 		cout << endl;
